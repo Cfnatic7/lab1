@@ -27,5 +27,20 @@ public class HelloWorld {
 
         return "method";
     }
-    
+
+
+    @GetMapping("/params")
+    public String nameAndSurname(
+            @RequestParam("param1") String param1,
+            @RequestParam("param2") String param2,
+            Model model) {
+        try {
+            model.addAttribute("param1", Integer.parseInt(param1) + Integer.parseInt(param2));
+        } catch(Exception e) {
+            model.addAttribute("param1", param1);
+            model.addAttribute("param2", param2);
+        }
+
+        return "params";
+    }
 }
