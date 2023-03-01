@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <h3>hello world</h3>
+    <p>integer param: <span th:text="${integer}"></span></p>
+    <p>integer2 param: <span th:text="${integer2}"></span></p>
+    <form th:action="@{/params}" method="GET">
+        <div>
+            <label for="firstParam">first param</label>
+            <input id="firstParam" name="param1" type="number">
+        </div>
+        <div>
+            <label for="secondParam">Family name</label>
+            <input id="secondParam" name="param2" type="number">
+        </div>
+        <button type="submit">go to params</button>
+    </form>
 </body>
 </html>
