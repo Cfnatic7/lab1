@@ -1,11 +1,13 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dtos.LoginDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -49,4 +51,27 @@ public class HelloWorld {
 
         return "params";
     }
+
+    @PostMapping("/session")
+    public String session(Model model, HttpSession session, @ModelAttribute("login") LoginDto login) {
+        if (login.getPassword().equals("test") && login.getUserName().equals("test")) {
+            model.addAttribute("loggedIn", "true");
+            session.setAttribute("loggedIn", true);
+        }
+        else {
+            model.addAttribute("loggedIn", "false");
+            session.setAttribute("loggedIn", false);
+        }
+        return "session-result";
+    }
+
+    @GetMapping("/session-result")
+    public String getSessionResult(Model model, HttpSession session) {
+        model.addAttribute("loggedIn",
+                session.getAttribute("loggedIn") != null ?
+                        session.getAttribute("loggedIn") : false);
+        return "session-result";
+    }
+
+
 }
