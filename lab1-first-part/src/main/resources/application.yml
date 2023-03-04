@@ -12,3 +12,4 @@ server:
   servlet:
     session:
       timeout: 300
+  port: 8080

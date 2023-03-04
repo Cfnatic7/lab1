@@ -12,7 +12,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,5 +114,31 @@ public class HelloWorld {
                 .body(cookie.getValue());
     }
 
+    @GetMapping("/date-and-name")
+    public ResponseEntity<String> dateAndName() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String dateString = dateFormat.format(date);
+        return ResponseEntity.ok()
+                .body("""
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                  <meta charset="UTF-8">
+                  <title>Title</title>
+                </head>
+                <body>
+                  <p>
+                  """ + dateString + """
+                  </p>
+                  <form action="http://localhost:8081/name" method="POST">
+                    <label for="name">name:</label>
+                    <input type="text" id="name" name="name" /><br/>
+                    <button type="submit">submit</button>
+                  </form>
+                </body>
+                </html>
+                """);
+    }
 
 }

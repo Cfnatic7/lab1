@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/zps
+    username: postgres
+    password: postgres
+  session:
+    store-type: jdbc
+    jdbc:
+
+server:
+  servlet:
+    session:
+      timeout: 300
+  port: 8081
+
